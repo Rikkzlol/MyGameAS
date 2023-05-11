@@ -15,10 +15,10 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[10];
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/map_01.txt");
+        loadMap("/maps/world01.txt");
     }
 
     public void getTileImage(){
@@ -45,6 +45,21 @@ public class TileManager {
             fis = new FileInputStream(file);
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(fis);
+
+            file = new File("res/tiles/tree.png");
+            fis = new FileInputStream(file);
+            tile[3] = new Tile();
+            tile[3].image = ImageIO.read(fis);
+
+            file = new File("res/tiles/earth.png");
+            fis = new FileInputStream(file);
+            tile[4] = new Tile();
+            tile[4].image = ImageIO.read(fis);
+
+            file = new File("res/tiles/sand.png");
+            fis = new FileInputStream(file);
+            tile[5] = new Tile();
+            tile[5].image = ImageIO.read(fis);
 
         } catch (IOException e){
             e.printStackTrace();
