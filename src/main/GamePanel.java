@@ -1,6 +1,6 @@
 package main;
 
-import Entity.Player;
+import entity.Player;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+    public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this,keyH);
 
 
