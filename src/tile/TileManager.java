@@ -40,11 +40,13 @@ public class TileManager {
             fis = new FileInputStream(file);
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(fis);
+            tile[1].collision = true;
 
             file = new File("res/tiles/water.png");
             fis = new FileInputStream(file);
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(fis);
+            tile[2].collision = true;
 
             file = new File("res/tiles/earth.png");
             fis = new FileInputStream(file);
@@ -55,6 +57,7 @@ public class TileManager {
             fis = new FileInputStream(file);
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(fis);
+            tile[4].collision = true;
 
             file = new File("res/tiles/sand.png");
             fis = new FileInputStream(file);
