@@ -117,7 +117,7 @@ public class Player extends Entity{
                 case "Door":
                     if(hasKey > 0) {
                         gp.obj[i] = null;
-                        hasKey--;w
+                        hasKey--;
                     }
                     System.out.println("Key:"+hasKey);
                     break;
