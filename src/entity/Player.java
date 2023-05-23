@@ -15,6 +15,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     int hasKey = 0;
+    int hasGold = 0;
 
 
     public Player(GamePanel gp, KeyHandler keyH){
@@ -120,6 +121,17 @@ public class Player extends Entity{
                         hasKey--;
                     }
                     System.out.println("Key:"+hasKey);
+                    break;
+                case "GoldCoin":
+                    hasGold++;
+                    gp.obj[i] = null;
+                    System.out.println("GoldCoin:"+hasGold);
+                case "PcMobile":
+                    if(hasGold >= 3){
+                        gp.obj[i] = null;
+                        hasGold = hasGold - 3;
+                    }
+                    System.out.println("GoldCoin:"+hasGold);
                     break;
             }
 
