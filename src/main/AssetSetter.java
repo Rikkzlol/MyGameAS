@@ -54,5 +54,9 @@ public class AssetSetter {
         gp.obj[10] = new OBJ_PcMobile();
         gp.obj[10].worldX = 10 * gp.tileSize;
         gp.obj[10].worldY = 8 * gp.tileSize;
+
+        gp.obj[11] = new OBJ_Boots();
+        gp.obj[11].worldX = 37 * gp.tileSize;
+        gp.obj[11].worldY = 42 * gp.tileSize;
     }
 }
