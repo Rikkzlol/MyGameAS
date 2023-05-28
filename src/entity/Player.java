@@ -14,8 +14,8 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
-    int hasKey = 0;
-    int hasGold = 0;
+    public int hasKey = 0;
+    public int hasGold = 0;
 
 
     public Player(GamePanel gp, KeyHandler keyH){
@@ -114,34 +114,45 @@ public class Player extends Entity{
                     gp.playSE(1);
                     hasKey++;
                     gp.obj[i] = null;
-                    System.out.println("Key:"+hasKey);
+                    gp.ui.showMessage("You got a key!");
                     break;
                 case "Door":
                     if(hasKey > 0) {
                         gp.playSE(3);
                         gp.obj[i] = null;
                         hasKey--;
+                        gp.ui.showMessage("You opened door!");
                     }
-                    System.out.println("Key:"+hasKey);
+                    else {
+                        gp.ui.showMessage("You need a key!");
+                    }
                     break;
                 case "GoldCoin":
                     gp.playSE(1);
                     hasGold++;
                     gp.obj[i] = null;
-                    System.out.println("GoldCoin:"+hasGold);
                 case "PcMobile":
                     if(hasGold >= 3){
                         gp.playSE(2);
                         gp.obj[i] = null;
                         hasGold = hasGold - 3;
                     }
-                    System.out.println("GoldCoin:"+hasGold);
+                    else {
+                        gp.ui.showMessage("You need a gold!");
+                    }
                     break;
                 case "Boots":
                     gp.playSE(2);
                     speed += 1;
                     gp.obj[i] = null;
+                    gp.ui.showMessage("Speed up!");
                     break;
+                case "Chest":
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSE(4);
+                    break;
+
             }
 
         }
