@@ -116,6 +116,11 @@ public class Player extends Entity{
                     gp.obj[i] = null;
                     gp.ui.showMessage("You got a key!");
                     break;
+                case "GoldCoin":
+                    gp.playSE(1);
+                    hasGold++;
+                    gp.obj[i] = null;
+                    gp.ui.showMessage("You have a gold!");
                 case "Door":
                     if(hasKey > 0) {
                         gp.playSE(3);
@@ -125,20 +130,6 @@ public class Player extends Entity{
                     }
                     else {
                         gp.ui.showMessage("You need a key!");
-                    }
-                    break;
-                case "GoldCoin":
-                    gp.playSE(1);
-                    hasGold++;
-                    gp.obj[i] = null;
-                case "PcMobile":
-                    if(hasGold >= 3){
-                        gp.playSE(2);
-                        gp.obj[i] = null;
-                        hasGold = hasGold - 3;
-                    }
-                    else {
-                        gp.ui.showMessage("You need a gold!");
                     }
                     break;
                 case "Boots":
@@ -152,7 +143,16 @@ public class Player extends Entity{
                     gp.stopMusic();
                     gp.playSE(4);
                     break;
-
+                case "PcMobile":
+                    if(hasGold >= 3){
+                        gp.playSE(2);
+                        gp.obj[i] = null;
+                        hasGold = hasGold - 3;
+                        gp.ui.showMessage("You got a PC!");
+                    } else {
+                        gp.ui.showMessage("You need 3 gold!");
+                    }
+                    break;
             }
 
         }

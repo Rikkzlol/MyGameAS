@@ -19,7 +19,7 @@ public class UI {
     public boolean gameFinished = false;
 
     double playTime;
-    DecimalFormat dFormat = new DecimalFormat("#0,00");
+    DecimalFormat dFormat = new DecimalFormat("#0.00");
 
 
 
