@@ -14,6 +14,9 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
+    public int hasKey = 0;
+    public int hasGold = 0;
+
 
     public Player(GamePanel gp, KeyHandler keyH){
 
@@ -24,6 +27,8 @@ public class Player extends Entity{
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
         solidArea = new Rectangle(8, 16, 32, 32);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -71,6 +76,11 @@ public class Player extends Entity{
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
+            // CHECK object collision
+            int objIndex = gp.cChecker.checkObject (this, true);
+            pickUpObject(objIndex);
+
+
             //if collision is false player can move
             if(collisionOn == false){
                 switch(direction){
@@ -91,6 +101,60 @@ public class Player extends Entity{
                 }
                 spriteCounter = 0;
             }
+        }
+    }
+    public void pickUpObject(int i){
+
+        if(i != 999){
+
+            String objectName = gp.obj[i].name;
+
+            switch (objectName){
+                case "Key":
+                    gp.playSE(1);
+                    hasKey++;
+                    gp.obj[i] = null;
+                    gp.ui.showMessage("You got a key!");
+                    break;
+                case "GoldCoin":
+                    gp.playSE(1);
+                    hasGold++;
+                    gp.obj[i] = null;
+                    gp.ui.showMessage("You have a gold!");
+                case "Door":
+                    if(hasKey > 0) {
+                        gp.playSE(3);
+                        gp.obj[i] = null;
+                        hasKey--;
+                        gp.ui.showMessage("You opened door!");
+                    }
+                    else {
+                        gp.ui.showMessage("You need a key!");
+                    }
+                    break;
+                case "Boots":
+                    gp.playSE(2);
+                    speed += 1;
+                    gp.obj[i] = null;
+                    gp.ui.showMessage("Speed up!");
+                    break;
+                case "Chest":
+                    gp.ui.gameFinished = true;
+                    gp.stopMusic();
+                    gp.playSE(4);
+                    break;
+                case "PcMobile":
+                    if(hasGold >= 3){
+                        gp.playSE(2);
+                        gp.obj[i] = null;
+                        hasGold = hasGold - 3;
+                        gp.ui.showMessage("You got a PC!");
+                    } else {
+                        gp.ui.showMessage("You need 3 gold!");
+                    }
+                    break;
+            }
+
         }
     }
 
